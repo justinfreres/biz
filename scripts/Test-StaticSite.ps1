@@ -31,3 +31,9 @@ foreach ($skill in @("PROFESSIONAL SKILLS", "Data recovery, backup-and-recovery 
     }
 }
 
+foreach ($credential in @("MCSA: Web Applications", "MCSD: App Builder", "MCPS: Microsoft Certified Professional", "MS: Programming in HTML5 with JavaScript and CSS3", "MCSD: Web Applications", "K2 Five: Core", "CompTIA Security+ ce Certification", "ISC2 Candidate", "CompTIA A+ Certification")) {
+    if ($homepage -notmatch [regex]::Escape($credential)) {
+        throw "The production homepage is missing credential history: $credential."
+    }
+}
+
