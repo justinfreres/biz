@@ -14,6 +14,8 @@ public sealed class StaticSiteTests
         Assert.Contains("Network &amp; infrastructure", homepage, StringComparison.Ordinal);
         Assert.Contains("Business Central extensions", homepage, StringComparison.Ordinal);
         Assert.Contains("Cybersecurity &amp; resilience", homepage, StringComparison.Ordinal);
+        Assert.Contains("PROFESSIONAL SKILLS", homepage, StringComparison.Ordinal);
+        Assert.Contains("Data recovery, backup-and-recovery systems", homepage, StringComparison.Ordinal);
     }
 
     [Fact]
