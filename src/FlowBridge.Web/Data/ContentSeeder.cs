@@ -41,7 +41,14 @@ public static class ContentSeeder
             "Cybersecurity master’s experience paired with production operations: practical risk reduction that supports delivery instead of slowing it down.",
             "Security posture reviews for applications, integrations, and operations\nAccess, logging, backup, and recovery improvement planning\nSecure release practices, dependency awareness, and change control\nClear risk documentation for owners and technical teams",
             "Organizations that want an actionable security baseline connected to real operations.",
-            50)
+            50),
+        new(
+            "PRACTICE 06",
+            "CompTIA A+ education",
+            "Educator-led CompTIA A+ continuing education that strengthens the practical support, troubleshooting, networking, endpoint, and security skills IT teams use every day.",
+            "Guided learning plans for foundational IT support topics\nHands-on troubleshooting, endpoint, networking, and security practice\nContinuing education and skills-refresh sessions for support teams\nMentoring for learners building confident help desk and field support habits",
+            "Aspiring IT professionals, support teams, and learners building stronger technical support fundamentals.",
+            60)
     ];
 
     public static async Task SeedAsync(ContentDbContext database, CancellationToken cancellationToken = default)
@@ -85,3 +92,4 @@ public static class ContentSeeder
         string Audience,
         int SortOrder);
 }
+
