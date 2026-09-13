@@ -42,6 +42,19 @@ foreach ($platform in @("Nintex Automation K2", "Nintex Workflow", "Microsoft Dy
     }
 }
 
+foreach ($bookingElement in @("PAID CONSULTATION", '$50 initial booking fee', "30–120 minutes", "Manual payment confirmation", "data-consultation-form", "Odoo One App Free", "Dynamics 365 Business Central trial")) {
+    if ($homepage -notmatch [regex]::Escape($bookingElement)) {
+        throw "The production homepage is missing the Odoo-connected booking flow: $bookingElement."
+    }
+}
+
+$siteScript = Get-Content -LiteralPath (Join-Path $siteRoot "app.js") -Raw
+foreach ($bookingScriptElement in @("info@flowbridge-systems-llc.odoo.com", "Manual payment: `$50 initial booking fee", "data-consultation-form")) {
+    if ($siteScript -notmatch [regex]::Escape($bookingScriptElement)) {
+        throw "The production booking workflow is missing: $bookingScriptElement."
+    }
+}
+
 foreach ($skill in @("PROFESSIONAL SKILLS", "Data recovery, backup-and-recovery systems", "CompTIA A+ certification", "IEEE &amp; NASA graduate research", "Artificial Intelligence for Defect Examination")) {
     if ($homepage -notmatch [regex]::Escape($skill)) {
         throw "The production homepage is missing skills content: $skill."
