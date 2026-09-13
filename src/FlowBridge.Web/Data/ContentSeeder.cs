@@ -48,7 +48,14 @@ public static class ContentSeeder
             "Educator-led CompTIA A+ continuing education that strengthens the practical support, troubleshooting, networking, endpoint, and security skills IT teams use every day.",
             "Guided learning plans for foundational IT support topics\nHands-on troubleshooting, endpoint, networking, and security practice\nContinuing education and skills-refresh sessions for support teams\nMentoring for learners building confident help desk and field support habits",
             "Aspiring IT professionals, support teams, and learners building stronger technical support fundamentals.",
-            60)
+            60),
+        new(
+            "PRACTICE 07",
+            "Access & Office automation",
+            "Microsoft Access application development and support for organizations that rely on established database tools, Excel and Word automation, and VBA-driven processes.",
+            "Access database and application design, repair, support, and handoff\nExcel and Word reporting, document generation, and VBA automation\nData, workflow, and integration improvements around legacy Office processes\nModernization assessment and migration roadmap to Microsoft 365, Power Platform, SQL-backed applications, or an equivalent supported platform",
+            "Teams that need dependable support for a business-critical Access application today and a practical modernization path for tomorrow.",
+            70)
     ];
 
     public static async Task SeedAsync(ContentDbContext database, CancellationToken cancellationToken = default)
