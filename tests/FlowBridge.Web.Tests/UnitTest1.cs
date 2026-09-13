@@ -16,6 +16,8 @@ public sealed class StaticSiteTests
         Assert.Contains("Cybersecurity &amp; resilience", homepage, StringComparison.Ordinal);
         Assert.Contains("PROFESSIONAL SKILLS", homepage, StringComparison.Ordinal);
         Assert.Contains("Data recovery, backup-and-recovery systems", homepage, StringComparison.Ordinal);
+        Assert.Contains("IEEE &amp; NASA graduate research", homepage, StringComparison.Ordinal);
+        Assert.Contains("Artificial Intelligence for Defect Examination", homepage, StringComparison.Ordinal);
     }
 
     [Fact]
