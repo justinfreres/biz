@@ -34,7 +34,7 @@
 
       serviceGrid.innerHTML = services.map((service, index) => {
         const bullets = Array.isArray(service.bulletPoints) ? service.bulletPoints : [];
-        return `<article class="service-card tone-${(index % 5) + 1}">
+        return `<article class="service-card tone-${(index % 6) + 1}">
           <p class="card-label">${escapeHtml(service.practice || `PRACTICE ${String(index + 1).padStart(2, '0')}`)}</p>
           <h3>${escapeHtml(service.title)}</h3>
           <p>${escapeHtml(service.summary)}</p>
@@ -49,3 +49,4 @@
 
   loadDatabaseServices();
 })();
+
