@@ -38,7 +38,7 @@ jobs:
           ./scripts/Publish-Static.ps1
           ./scripts/Test-StaticSite.ps1 -SiteDirectory dist
       - name: Configure GitHub Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
@@ -54,4 +54,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
