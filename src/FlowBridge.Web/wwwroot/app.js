@@ -90,4 +90,37 @@
       window.location.href = `mailto:${leadGateway}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
     });
   }
+
+  const productOrderForm = document.querySelector('[data-product-order-form]');
+  const productOrderStatus = document.querySelector('#product-order-status');
+
+  if (productOrderForm) {
+    productOrderForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const request = new FormData(productOrderForm);
+      const productTitle = productOrderForm.dataset.productTitle || 'FlowBridge digital product';
+      const price = productOrderForm.dataset.productPrice || '$5.99';
+      const lines = [
+        'FlowBridge digital product order request',
+        '',
+        `Product: ${productTitle}`,
+        `Price: ${price} USD`,
+        `Name: ${request.get('name') || ''}`,
+        `Delivery email: ${request.get('email') || ''}`,
+        '',
+        'Customer note:',
+        String(request.get('note') || ''),
+        '',
+        'Manual fulfillment: send payment instructions, confirm payment, then email the digital PDF.'
+      ];
+      const subject = `Digital product order | ${productTitle} | ${price}`;
+      const leadGateway = 'info@flowbridge-systems-llc.odoo.com';
+
+      if (productOrderStatus) {
+        productOrderStatus.textContent = 'Opening your email application. Send the message to create your Odoo CRM digital-order request.';
+      }
+
+      window.location.href = `mailto:${leadGateway}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
+    });
+  }
 })();

@@ -19,8 +19,13 @@ public sealed class StaticSiteTests
         Assert.Contains("PAID CONSULTATION", homepage, StringComparison.Ordinal);
         Assert.Contains("$50 initial booking fee", homepage, StringComparison.Ordinal);
         Assert.Contains("data-consultation-form", homepage, StringComparison.Ordinal);
+        Assert.Contains("FLOWBRIDGE DIGITAL PRODUCTS", homepage, StringComparison.Ordinal);
+        Assert.Contains("FlowBridge Funny Tech Coloring Book: Cosmic Desk Mayhem", homepage, StringComparison.Ordinal);
+        Assert.Contains("$5.99", homepage, StringComparison.Ordinal);
+        Assert.Contains("data-product-order-form", homepage, StringComparison.Ordinal);
         var siteScript = File.ReadAllText(Path.Combine(GetRepositoryRoot(), "src", "FlowBridge.Web", "wwwroot", "app.js"));
         Assert.Contains("info@flowbridge-systems-llc.odoo.com", siteScript, StringComparison.Ordinal);
+        Assert.Contains("Manual fulfillment: send payment instructions", siteScript, StringComparison.Ordinal);
         Assert.Contains("Cybersecurity &amp; resilience", homepage, StringComparison.Ordinal);
         Assert.Contains("PROFESSIONAL SKILLS", homepage, StringComparison.Ordinal);
         Assert.Contains("Data recovery, backup-and-recovery systems", homepage, StringComparison.Ordinal);
