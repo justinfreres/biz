@@ -29,7 +29,7 @@ public sealed class StaticSiteTests
     }
 
     [Fact]
-    public async Task Local_content_database_seeds_all_six_service_options()
+    public async Task Local_content_database_seeds_all_seven_service_options()
     {
         var databasePath = Path.Combine(GetRepositoryRoot(), "artifacts", $"content-test-{Guid.NewGuid():N}.db");
         Directory.CreateDirectory(Path.GetDirectoryName(databasePath)!);
@@ -49,11 +49,12 @@ public sealed class StaticSiteTests
                     .Select(service => service.Title)
                     .ToListAsync();
 
-                Assert.Equal(6, serviceTitles.Count);
+                Assert.Equal(7, serviceTitles.Count);
                 Assert.Contains("Network & infrastructure", serviceTitles);
                 Assert.Contains("Business Central extensions", serviceTitles);
                 Assert.Contains("Cybersecurity & resilience", serviceTitles);
                 Assert.Contains("CompTIA A+ education", serviceTitles);
+                Assert.Contains("Access & Office automation", serviceTitles);
             }
         }
         finally
