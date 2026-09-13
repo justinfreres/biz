@@ -12,7 +12,7 @@ I help organizations keep business-critical software dependable while they moder
 
 My work sits where workflow automation, ERP operations, software engineering, and production support meet. I support teams dealing with K2 and Nintex environments that need to be stabilized, upgraded, documented, or moved toward the cloud—and Odoo environments that need dependable development, integrations, upgrades, and senior technical ownership.
 
-I bring enterprise experience across architecture, full-stack development, infrastructure, CI/CD, security-minded delivery, SharePoint, and production support. I am a former K2-certified support specialist and hold K2 Five: Core certification. My Odoo background includes more than five years of development and production support, including custom modules, workflow automation, upgrades, and integrations.
+I bring enterprise experience across architecture, full-stack development, infrastructure, CI/CD, security-minded delivery, SharePoint, and production support. I am a former K2-certified support specialist with K2 Five: Core credential history. My Odoo background includes more than five years of development and production support, including custom modules, workflow automation, upgrades, and integrations.
 
 I start with a practical assessment: what is at risk, what is blocking the team, and what is the smallest safe next move. Clients get a clear roadmap, disciplined execution, documented handoff, and a partner who protects production.
 
@@ -67,3 +67,4 @@ If your organization—or a client you support—needs senior help with K2, Nint
 ## Connection note for former colleagues
 
 Hi [Name] — I’m launching FlowBridge Systems, a consulting practice focused on keeping K2, Nintex, and Odoo dependable while organizations modernize them. Given our work together, I thought of you. If you run into a team that needs senior escalation help, a migration assessment, or Odoo production support, I’d appreciate being kept in mind. No pressure—just reconnecting and sharing the new focus.
+
