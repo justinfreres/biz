@@ -12,7 +12,10 @@ public sealed class StaticSiteTests
         Assert.Contains("FlowBridge Systems", homepage, StringComparison.Ordinal);
         Assert.Contains("30-DAY LAUNCH SYSTEM", homepage, StringComparison.Ordinal);
         Assert.Contains("Network &amp; infrastructure", homepage, StringComparison.Ordinal);
-        Assert.Contains("Business Central extensions", homepage, StringComparison.Ordinal);
+        Assert.Contains("Microsoft Dynamics 365 Business Central", homepage, StringComparison.Ordinal);
+        Assert.Contains("Nintex Automation K2", homepage, StringComparison.Ordinal);
+        Assert.Contains("Microsoft 365 &amp; Power Platform", homepage, StringComparison.Ordinal);
+        Assert.Contains("Odoo Community and Enterprise", homepage, StringComparison.Ordinal);
         Assert.Contains("Cybersecurity &amp; resilience", homepage, StringComparison.Ordinal);
         Assert.Contains("PROFESSIONAL SKILLS", homepage, StringComparison.Ordinal);
         Assert.Contains("Data recovery, backup-and-recovery systems", homepage, StringComparison.Ordinal);
@@ -83,4 +86,3 @@ public sealed class StaticSiteTests
         throw new DirectoryNotFoundException("Could not locate the FlowBridge repository root.");
     }
 }
-
