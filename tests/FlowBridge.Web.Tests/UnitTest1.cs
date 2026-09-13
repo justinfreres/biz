@@ -16,6 +16,11 @@ public sealed class StaticSiteTests
         Assert.Contains("Nintex Automation K2", homepage, StringComparison.Ordinal);
         Assert.Contains("Microsoft 365 &amp; Power Platform", homepage, StringComparison.Ordinal);
         Assert.Contains("Odoo Community and Enterprise", homepage, StringComparison.Ordinal);
+        Assert.Contains("PAID CONSULTATION", homepage, StringComparison.Ordinal);
+        Assert.Contains("$50 initial booking fee", homepage, StringComparison.Ordinal);
+        Assert.Contains("data-consultation-form", homepage, StringComparison.Ordinal);
+        var siteScript = File.ReadAllText(Path.Combine(GetRepositoryRoot(), "src", "FlowBridge.Web", "wwwroot", "app.js"));
+        Assert.Contains("info@flowbridge-systems-llc.odoo.com", siteScript, StringComparison.Ordinal);
         Assert.Contains("Cybersecurity &amp; resilience", homepage, StringComparison.Ordinal);
         Assert.Contains("PROFESSIONAL SKILLS", homepage, StringComparison.Ordinal);
         Assert.Contains("Data recovery, backup-and-recovery systems", homepage, StringComparison.Ordinal);
