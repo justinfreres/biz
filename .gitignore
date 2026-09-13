@@ -10,3 +10,10 @@ dist/*.gz
 dist/**/*.br
 dist/**/*.gz
 src/FlowBridge.Web/App_Data/
+
+# Owner-held digital product source art and fulfillment files
+assets/coloring-book/
+output/
+tmp/
+dist/assets/products/
+src/FlowBridge.Web/wwwroot/assets/products/
