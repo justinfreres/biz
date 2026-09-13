@@ -6,7 +6,7 @@ param(
 $ErrorActionPreference = "Stop"
 $repositoryRoot = Split-Path -Parent $PSScriptRoot
 $siteRoot = Join-Path $repositoryRoot $SiteDirectory
-$requiredFiles = @("index.html", "style.css", "app.js", "favicon.svg", "admin\index.html", "admin\login.html", "admin\admin.js", "admin\login.js", "admin\admin.css")
+$requiredFiles = @("index.html", "style.css", "app.js", "favicon.svg", "assets\flowbridge-cosmos-mark.png", "admin\index.html", "admin\login.html", "admin\admin.js", "admin\login.js", "admin\admin.css")
 
 foreach ($file in $requiredFiles) {
     if (-not (Test-Path -LiteralPath (Join-Path $siteRoot $file))) {
@@ -17,6 +17,12 @@ foreach ($file in $requiredFiles) {
 $homepage = Get-Content -LiteralPath (Join-Path $siteRoot "index.html") -Raw
 if ($homepage -notmatch "FlowBridge Systems") {
     throw "The production homepage is missing the FlowBridge Systems brand."
+}
+
+foreach ($brandElement in @("flowbridge-cosmos-mark.png", "THE FLOWBRIDGE MARK", "FlowBridge Systems constellation bridge logo")) {
+    if ($homepage -notmatch [regex]::Escape($brandElement)) {
+        throw "The production homepage is missing cosmic branding: $brandElement."
+    }
 }
 
 foreach ($service in @("Network &amp; infrastructure", "Business Central extensions", "Cybersecurity &amp; resilience", "CompTIA A+ education", "Access &amp; Office automation")) {
