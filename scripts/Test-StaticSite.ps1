@@ -19,7 +19,7 @@ if ($homepage -notmatch "FlowBridge Systems") {
     throw "The production homepage is missing the FlowBridge Systems brand."
 }
 
-foreach ($service in @("Network &amp; infrastructure", "Business Central extensions", "Cybersecurity &amp; resilience", "CompTIA A+ education")) {
+foreach ($service in @("Network &amp; infrastructure", "Business Central extensions", "Cybersecurity &amp; resilience", "CompTIA A+ education", "Access &amp; Office automation")) {
     if ($homepage -notmatch [regex]::Escape($service)) {
         throw "The production homepage is missing $service."
     }
