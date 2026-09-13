@@ -25,7 +25,7 @@ foreach ($service in @("Network &amp; infrastructure", "Business Central extensi
     }
 }
 
-foreach ($skill in @("PROFESSIONAL SKILLS", "Data recovery, backup-and-recovery systems", "CompTIA A+ certification")) {
+foreach ($skill in @("PROFESSIONAL SKILLS", "Data recovery, backup-and-recovery systems", "CompTIA A+ certification", "IEEE &amp; NASA graduate research", "Artificial Intelligence for Defect Examination")) {
     if ($homepage -notmatch [regex]::Escape($skill)) {
         throw "The production homepage is missing skills content: $skill."
     }
