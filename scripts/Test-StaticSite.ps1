@@ -48,7 +48,7 @@ foreach ($bookingElement in @("PAID CONSULTATION", '$50 initial booking fee', "3
     }
 }
 
-foreach ($productElement in @("FLOWBRIDGE DIGITAL PRODUCTS", "FlowBridge Funny Tech Coloring Book: Cosmic Desk Mayhem", "25 printable pages", '$5.99', "data-product-order-form", "Manual payment and email fulfillment")) {
+foreach ($productElement in @("FLOWBRIDGE DIGITAL PRODUCTS", "FlowBridge Funny Tech Coloring Book: Cosmic Desk Mayhem", "20 printable pages", '$5.99', "data-product-order-form", "Manual payment and email fulfillment")) {
     if ($homepage -notmatch [regex]::Escape($productElement)) {
         throw "The production homepage is missing the digital-product storefront: $productElement."
     }
