@@ -4,8 +4,8 @@
 
 - **ASP.NET Core 10 / .NET 10.0.401** is the source platform. The production site is an ASP.NET Core project that serves the same static client assets locally and produces a static deployment package for free edge hosting.
 - **`dev`** is the integration branch. Every push and pull request runs restore, build, tests, and static-site validation.
-- **`stage`** is the release-candidate branch. A successful push deploys a Cloudflare Pages preview after a GitHub connection and secrets are added.
-- **`main`** is production. A successful push runs the same verification sequence and deploys the production Pages site.
+- **`stage`** is the release-candidate branch. A successful push runs verification and creates a Cloudflare Pages preview when the optional Cloudflare secrets are present.
+- **`main`** is production. A successful push runs the same verification sequence and publishes the verified static site to free GitHub Pages.
 - GitHub Actions workflows, .NET dependency locks, health endpoint, test project, static-output checks, Dependabot updates, and release scripts are in the repository.
 
 ## Branch policy
@@ -13,24 +13,24 @@
 | Branch | Purpose | How it changes | Deployment |
 |---|---|---|---|
 | `dev` | Day-to-day development | Feature branches merge here through pull requests | Verification only |
-| `stage` | Release candidate | Pull request from `dev`; require passing verification | Cloudflare Pages preview |
-| `main` | Production | Pull request from `stage`; require passing verification and manual approval | Cloudflare Pages production |
+| `stage` | Release candidate | Pull request from `dev`; require passing verification | Optional Cloudflare Pages preview |
+| `main` | Production | Pull request from `stage`; require passing verification and manual approval | GitHub Pages production |
 
 Never edit `main` directly. Protect all three branches in the Git host. Require at least one approval for `stage` and `main`, require the **Verify** status check, and dismiss stale approvals after new commits.
 
 ## One-time owner connection steps
 
-These actions need the owner’s GitHub and Cloudflare credentials; they cannot be safely performed from a local checkout.
+The GitHub repository, `dev`, `stage`, and `main` branches, Actions workflows, and free GitHub Pages delivery are already configured. GitHub Actions will create the Pages deployment on the first successful production run.
 
-1. Create or choose a GitHub repository named `flowbridge-systems` and push this repository to it.
-2. In GitHub, enable Actions and configure the branch protections above.
-3. Create a free Cloudflare account and a Pages project named `flowbridge-systems`.
-4. Create a Cloudflare API token limited to Pages edit access for that account. In the GitHub repository, save it as `CLOUDFLARE_API_TOKEN` and save the account identifier as `CLOUDFLARE_ACCOUNT_ID`.
-5. Create GitHub Environments named `staging` and `production`; require your approval for production.
-6. Push `dev`, then promote it to `stage`, then promote it to `main`. The workflow will publish the verified static output automatically.
+1. In GitHub, enable Actions if the account has globally disabled it, then configure the branch protections above.
+2. Create GitHub Environments named `staging` and `production`; require your approval for production.
+3. Optionally create a free Cloudflare account and a Pages project named `flowbridge-systems` for a staging preview and alternate edge host.
+4. For that optional Cloudflare deployment, save a Pages-edit API token as `CLOUDFLARE_API_TOKEN` and its account identifier as `CLOUDFLARE_ACCOUNT_ID` in the GitHub repository secrets. Until then, the Cloudflare workflow reports a configuration notice and finishes successfully.
+5. Promote work through `dev`, `stage`, and `main`. The main workflow publishes the verified static output to GitHub Pages automatically.
 
 ## Why the deployed output is static
 
-The site currently has no server-side data, authentication, uploads, or database. ASP.NET Core 10 is used for the application source, local serving, health endpoint, compilation, tests, and release output; Cloudflare Pages serves the verified static publish output at the edge. This provides a free production host without pretending a static business site needs an always-on paid .NET server.
+The public site uses a verified static package. ASP.NET Core 10 is used for the application source, local serving, health endpoint, compilation, tests, local SQLite-backed content administration, and release output; GitHub Pages serves the verified static publish output for free. The local content database is intentionally not published to a static host.
 
 If the site later needs client portals, Odoo APIs, authentication, or private data, move the ASP.NET Core runtime to a suitable server host and keep this branch/CI/CD process unchanged.
+
