@@ -48,5 +48,46 @@
   }
 
   loadDatabaseServices();
-})();
 
+  const consultationForm = document.querySelector('[data-consultation-form]');
+  const consultationDate = document.querySelector('#consultation-date');
+  const consultationStatus = document.querySelector('#consultation-status');
+
+  if (consultationDate) {
+    consultationDate.min = new Date().toISOString().slice(0, 10);
+  }
+
+  if (consultationForm) {
+    consultationForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const request = new FormData(consultationForm);
+      const name = request.get('name') || '';
+      const service = request.get('service') || 'Custom consultation';
+      const duration = request.get('duration') || '30 minutes';
+      const lines = [
+        'FlowBridge paid consultation request',
+        '',
+        `Name: ${name}`,
+        `Work email: ${request.get('email') || ''}`,
+        `Company: ${request.get('company') || ''}`,
+        `Phone: ${request.get('phone') || ''}`,
+        `Primary need: ${service}`,
+        `Requested time: ${duration}`,
+        `Preferred day: ${request.get('date') || ''}`,
+        '',
+        'Desired outcome:',
+        String(request.get('details') || ''),
+        '',
+        'Manual payment: $50 initial booking fee. Confirm remaining scope and availability before reserving the session.'
+      ];
+      const subject = `Paid consultation request | ${service} | ${duration}`;
+      const leadGateway = 'info@flowbridge-systems-llc.odoo.com';
+
+      if (consultationStatus) {
+        consultationStatus.textContent = 'Opening your email application. Send the message to create your Odoo CRM consultation request.';
+      }
+
+      window.location.href = `mailto:${leadGateway}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
+    });
+  }
+})();
