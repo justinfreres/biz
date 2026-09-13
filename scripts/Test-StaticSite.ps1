@@ -30,9 +30,15 @@ foreach ($brandElement in @("flowbridge-cosmos-mark.png", "favicon.ico", "THE FL
     }
 }
 
-foreach ($service in @("Network &amp; infrastructure", "Business Central extensions", "Cybersecurity &amp; resilience", "CompTIA A+ education", "Access &amp; Office automation")) {
+foreach ($service in @("Nintex Automation K2 &amp; workflow", "Odoo ERP &amp; operations", "Microsoft Dynamics 365 Business Central", "Cybersecurity &amp; resilience", "CompTIA A+ education", "Microsoft Access &amp; Microsoft 365 automation")) {
     if ($homepage -notmatch [regex]::Escape($service)) {
         throw "The production homepage is missing $service."
+    }
+}
+
+foreach ($platform in @("Nintex Automation K2", "Nintex Workflow", "Microsoft Dynamics 365 Business Central", "Microsoft 365", "Power Platform", "Odoo Community and Enterprise", "independent consultancy")) {
+    if ($homepage -notmatch [regex]::Escape($platform)) {
+        throw "The production homepage is missing commercial-platform branding: $platform."
     }
 }
 
