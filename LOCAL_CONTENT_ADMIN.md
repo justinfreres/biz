@@ -33,7 +33,7 @@ The first start creates the database and seeds the seven initial practices: K2/N
 
 ## Digital product and coloring-book series workflow
 
-The first digital product is **FlowBridge Funny Tech Coloring Book: Cosmic Desk Mayhem (Series 1)**. It is a 20-page printable PDF (cover plus 19 original coloring pages) priced at **$5.99 USD** and fulfilled manually.
+The first digital product is **FlowBridge Funny Tech Coloring Book: Cosmic Desk Mayhem (Series 1)**. It is a 20-page printable PDF (cover, 18 original coloring pages, and a final FlowBridge services guide) priced at **$5.99 USD** and fulfilled manually.
 
 ### Odoo CRM manual fulfillment
 

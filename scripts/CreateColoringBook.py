@@ -14,7 +14,8 @@ THUMBNAIL_DESTINATIONS = [
     ROOT / "src" / "FlowBridge.Web" / "wwwroot" / "assets" / "products" / "flowbridge-funny-tech-coloring-book-series-1-cover.png",
 ]
 RENDERED_PAGES = ROOT / "tmp" / "pdfs" / "coloring-book-rendered-pages"
-TARGET_INTERIOR_PAGES = 19
+TARGET_COLORING_PAGES = 18
+TOTAL_PAGES = 20
 
 COVER = ASSETS / "exec-fcdc7463-4de4-4e5f-b9ab-79b47769bab1.png"
 SHEETS = [
@@ -38,6 +39,72 @@ def make_print_page(image, footer):
     font = ImageFont.load_default()
     footer_width = draw.textbbox((0, 0), footer, font=font)[2]
     draw.text(((page.width - footer_width) // 2, 1595), footer, fill="black", font=font)
+    return page
+
+
+def service_font(size, bold=False):
+    preferred = "arialbd.ttf" if bold else "arial.ttf"
+    font_path = Path("C:/Windows/Fonts") / preferred
+    if font_path.exists():
+        return ImageFont.truetype(str(font_path), size)
+    return ImageFont.load_default()
+
+
+def make_services_page():
+    page = Image.new("RGB", (1275, 1650), "white")
+    draw = ImageDraw.Draw(page)
+    black = (11, 13, 18)
+    silver = (214, 219, 225)
+    gray = (80, 87, 96)
+
+    draw.rounded_rectangle((55, 55, 1220, 1560), radius=18, outline=black, width=5)
+    draw.rounded_rectangle((65, 65, 1210, 320), radius=12, fill=black)
+    for x, y, radius in ((120, 120, 8), (1135, 130, 6), (1060, 250, 5), (210, 250, 5), (1160, 290, 4)):
+        draw.ellipse((x - radius, y - radius, x + radius, y + radius), fill="white")
+
+    brand_font = service_font(50, bold=True)
+    tagline_font = service_font(28, bold=True)
+    title_font = service_font(52, bold=True)
+    intro_font = service_font(25)
+    card_title_font = service_font(30, bold=True)
+    card_copy_font = service_font(22)
+    cta_font = service_font(34, bold=True)
+    url_font = service_font(20)
+    footer_font = service_font(16, bold=True)
+
+    def centered(text, y, font, fill):
+        left, _, right, _ = draw.textbbox((0, 0), text, font=font)
+        draw.text(((page.width - (right - left)) // 2, y), text, font=font, fill=fill)
+
+    centered("FLOWBRIDGE SYSTEMS LLC", 125, brand_font, "white")
+    centered("AUTOMATION - MODERNIZATION - RESILIENCE", 205, tagline_font, silver)
+    centered("YOUR NEXT TECH PROJECT STARTS HERE", 375, title_font, black)
+    centered("Practical consulting for the systems your business depends on.", 445, intro_font, gray)
+
+    services = [
+        ("Nintex Automation & K2", "Support - upgrades - cloud migrations"),
+        ("Odoo Business Systems", "CRM - operations - practical workflows"),
+        ("Microsoft Dynamics 365", "Business Central - AL extensions"),
+        ("Networks & Cybersecurity", "Infrastructure - recovery - security"),
+        ("Access, Microsoft 365 & VBA", "App modernization - office automation"),
+        ("CompTIA A+ Education", "Hands-on training - continuing education"),
+    ]
+    card_width, card_height = 520, 175
+    for index, (heading, detail) in enumerate(services):
+        column = index % 2
+        row = index // 2
+        x = 105 + column * 545
+        y = 535 + row * 205
+        draw.rounded_rectangle((x, y, x + card_width, y + card_height), radius=18, fill=(245, 247, 249), outline=(160, 168, 178), width=3)
+        draw.rectangle((x + 22, y + 26, x + 32, y + card_height - 26), fill=black)
+        draw.text((x + 55, y + 35), heading, font=card_title_font, fill=black)
+        draw.text((x + 55, y + 95), detail, font=card_copy_font, fill=gray)
+
+    draw.rounded_rectangle((105, 1190, 1170, 1450), radius=18, fill=black)
+    centered("READY FOR A STRONGER SYSTEM?", 1240, cta_font, "white")
+    centered("Book a 30-minute consultation - $50", 1305, service_font(28, bold=True), silver)
+    centered("flowbridge-systems-consulting.justinfreres.chatgpt.site", 1375, url_font, "white")
+    centered("FLOWBRIDGE SYSTEMS LLC - SERVICES & CONSULTING", 1590, footer_font, black)
     return page
 
 
@@ -74,7 +141,7 @@ def main():
                 (mid_x, mid_y, sheet.width, sheet.height),
             ]
             for box in boxes:
-                if len(rendered_paths) >= TARGET_INTERIOR_PAGES + 1:
+                if len(rendered_paths) >= TARGET_COLORING_PAGES + 1:
                     break
                 page_number += 1
                 footer = f"FLOWBRIDGE FUNNY TECH COLORING BOOK - SERIES 1 - PAGE {page_number - 1}"
@@ -83,17 +150,24 @@ def main():
                 rendered.save(rendered_path, "JPEG", quality=88, optimize=True)
                 rendered_paths.append(rendered_path)
 
-        if len(rendered_paths) >= TARGET_INTERIOR_PAGES + 1:
+        if len(rendered_paths) >= TARGET_COLORING_PAGES + 1:
             break
 
-    if len(rendered_paths) != TARGET_INTERIOR_PAGES + 1:
-        raise ValueError(f"Series 1 requires exactly {TARGET_INTERIOR_PAGES} interior coloring pages.")
+    if len(rendered_paths) != TARGET_COLORING_PAGES + 1:
+        raise ValueError(f"Series 1 requires exactly {TARGET_COLORING_PAGES} coloring pages before the services page.")
+
+    services_path = RENDERED_PAGES / "page-20-services.jpg"
+    make_services_page().save(services_path, "JPEG", quality=92, optimize=True)
+    rendered_paths.append(services_path)
+
+    if len(rendered_paths) != TOTAL_PAGES:
+        raise ValueError(f"Series 1 requires exactly {TOTAL_PAGES} total pages.")
 
     page_width, page_height = letter
     pdf = canvas.Canvas(str(OUTPUT), pagesize=letter, pageCompression=1)
     pdf.setTitle("FlowBridge Funny Tech Coloring Book - Series 1")
     pdf.setAuthor("FlowBridge Systems LLC")
-    pdf.setSubject("Original funny technology coloring pages")
+    pdf.setSubject("Original funny technology coloring pages and FlowBridge services guide")
 
     for rendered_path in rendered_paths:
         pdf.drawImage(str(rendered_path), 0, 0, page_width, page_height)
