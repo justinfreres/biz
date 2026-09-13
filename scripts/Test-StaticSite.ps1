@@ -48,8 +48,14 @@ foreach ($bookingElement in @("PAID CONSULTATION", '$50 initial booking fee', "3
     }
 }
 
+foreach ($productElement in @("FLOWBRIDGE DIGITAL PRODUCTS", "FlowBridge Funny Tech Coloring Book: Cosmic Desk Mayhem", "25 printable pages", '$5.99', "data-product-order-form", "Manual payment and email fulfillment")) {
+    if ($homepage -notmatch [regex]::Escape($productElement)) {
+        throw "The production homepage is missing the digital-product storefront: $productElement."
+    }
+}
+
 $siteScript = Get-Content -LiteralPath (Join-Path $siteRoot "app.js") -Raw
-foreach ($bookingScriptElement in @("info@flowbridge-systems-llc.odoo.com", "Manual payment: `$50 initial booking fee", "data-consultation-form")) {
+foreach ($bookingScriptElement in @("info@flowbridge-systems-llc.odoo.com", "Manual payment: `$50 initial booking fee", "data-consultation-form", "data-product-order-form", "Manual fulfillment: send payment instructions")) {
     if ($siteScript -notmatch [regex]::Escape($bookingScriptElement)) {
         throw "The production booking workflow is missing: $bookingScriptElement."
     }
