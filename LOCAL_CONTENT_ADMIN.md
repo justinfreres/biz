@@ -22,7 +22,7 @@ That database is intentionally excluded from Git. The public, free static site k
 
 3. Open [http://127.0.0.1:5010/admin/](http://127.0.0.1:5010/admin/) and sign in with that password.
 
-The first start creates the database and seeds the six initial practices: K2/Nintex, Odoo, networking and infrastructure, Business Central AL extensions, cybersecurity/resilience, and CompTIA A+ education.
+The first start creates the database and seeds the seven initial practices: K2/Nintex, Odoo, networking and infrastructure, Business Central AL extensions, cybersecurity/resilience, CompTIA A+ education, and Access & Office automation.
 
 ## Operating notes
 
