@@ -6,7 +6,7 @@ param(
 $ErrorActionPreference = "Stop"
 $repositoryRoot = Split-Path -Parent $PSScriptRoot
 $siteRoot = Join-Path $repositoryRoot $SiteDirectory
-$requiredFiles = @("index.html", "style.css", "app.js", "favicon.svg", "assets\flowbridge-cosmos-mark.png", "admin\index.html", "admin\login.html", "admin\admin.js", "admin\login.js", "admin\admin.css")
+$requiredFiles = @("index.html", "style.css", "app.js", "favicon.svg", "favicon.ico", "assets\flowbridge-cosmos-mark.png", "admin\index.html", "admin\login.html", "admin\admin.js", "admin\login.js", "admin\admin.css")
 
 foreach ($file in $requiredFiles) {
     if (-not (Test-Path -LiteralPath (Join-Path $siteRoot $file))) {
@@ -19,7 +19,12 @@ if ($homepage -notmatch "FlowBridge Systems") {
     throw "The production homepage is missing the FlowBridge Systems brand."
 }
 
-foreach ($brandElement in @("flowbridge-cosmos-mark.png", "THE FLOWBRIDGE MARK", "FlowBridge Systems constellation bridge logo")) {
+$faviconBytes = [System.IO.File]::ReadAllBytes((Join-Path $siteRoot "favicon.ico"))
+if ($faviconBytes.Length -lt 4 -or $faviconBytes[0] -ne 0 -or $faviconBytes[1] -ne 0 -or $faviconBytes[2] -ne 1 -or $faviconBytes[3] -ne 0) {
+    throw "The FlowBridge browser icon is not a valid ICO file."
+}
+
+foreach ($brandElement in @("flowbridge-cosmos-mark.png", "favicon.ico", "THE FLOWBRIDGE MARK", "FlowBridge Systems constellation bridge logo")) {
     if ($homepage -notmatch [regex]::Escape($brandElement)) {
         throw "The production homepage is missing cosmic branding: $brandElement."
     }
@@ -42,4 +47,3 @@ foreach ($credential in @("MCSA: Web Applications", "MCSD: App Builder", "MCPS: 
         throw "The production homepage is missing credential history: $credential."
     }
 }
-
