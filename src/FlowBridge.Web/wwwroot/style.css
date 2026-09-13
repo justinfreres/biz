@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap');
 
 .education-card,.tone-6 { background:#3a2d21; }
+.access-card,.tone-7 { background:#3a2733; }
 
 :root { --ink:#09131e; --panel:#102332; --blue:#5bc9e8; --lime:#d6ec69; --chalk:#eef5f3; --muted:#9bb1bd; --line:rgba(215,237,241,.18); --warm:#f5f1e9; --orange:#fa8b57; }
 * { box-sizing:border-box; }
