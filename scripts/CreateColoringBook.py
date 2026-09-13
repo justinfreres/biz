@@ -14,6 +14,7 @@ THUMBNAIL_DESTINATIONS = [
     ROOT / "src" / "FlowBridge.Web" / "wwwroot" / "assets" / "products" / "flowbridge-funny-tech-coloring-book-series-1-cover.png",
 ]
 RENDERED_PAGES = ROOT / "tmp" / "pdfs" / "coloring-book-rendered-pages"
+TARGET_INTERIOR_PAGES = 19
 
 COVER = ASSETS / "exec-fcdc7463-4de4-4e5f-b9ab-79b47769bab1.png"
 SHEETS = [
@@ -73,6 +74,8 @@ def main():
                 (mid_x, mid_y, sheet.width, sheet.height),
             ]
             for box in boxes:
+                if len(rendered_paths) >= TARGET_INTERIOR_PAGES + 1:
+                    break
                 page_number += 1
                 footer = f"FLOWBRIDGE FUNNY TECH COLORING BOOK - SERIES 1 - PAGE {page_number - 1}"
                 rendered = make_print_page(sheet.crop(box), footer)
@@ -80,8 +83,11 @@ def main():
                 rendered.save(rendered_path, "JPEG", quality=88, optimize=True)
                 rendered_paths.append(rendered_path)
 
-    if len(rendered_paths) != 25:
-        raise ValueError("Series 1 requires exactly 24 interior coloring pages.")
+        if len(rendered_paths) >= TARGET_INTERIOR_PAGES + 1:
+            break
+
+    if len(rendered_paths) != TARGET_INTERIOR_PAGES + 1:
+        raise ValueError(f"Series 1 requires exactly {TARGET_INTERIOR_PAGES} interior coloring pages.")
 
     page_width, page_height = letter
     pdf = canvas.Canvas(str(OUTPUT), pagesize=letter, pageCompression=1)
