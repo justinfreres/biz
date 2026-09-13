@@ -1,0 +1,12 @@
+bin/
+obj/
+artifacts/
+verification-dist/
+.vs/
+.idea/
+TestResults/
+dist/*.br
+dist/*.gz
+dist/**/*.br
+dist/**/*.gz
+src/FlowBridge.Web/App_Data/

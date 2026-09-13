@@ -1,0 +1,35 @@
+name: Verify
+
+on:
+  pull_request:
+    branches: [dev, stage, main]
+  push:
+    branches: [dev, stage, main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    env:
+      CI: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v6
+      - name: Set up .NET 10
+        uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+      - name: Restore locked dependencies
+        run: dotnet restore FlowBridge.slnx --locked-mode
+      - name: Build
+        run: dotnet build FlowBridge.slnx --configuration Release --no-restore
+      - name: Test
+        run: dotnet test FlowBridge.slnx --configuration Release --no-build --no-restore
+      - name: Validate static output
+        shell: pwsh
+        run: |
+          ./scripts/Publish-Static.ps1 -OutputDirectory verification-dist
+          ./scripts/Test-StaticSite.ps1 -SiteDirectory verification-dist

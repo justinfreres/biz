@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>FlowBridge | Local admin sign-in</title>
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+  <body class="admin-body">
+    <main class="login-shell">
+      <a class="admin-brand" href="/">← FlowBridge Systems</a>
+      <section class="login-card" aria-labelledby="login-title">
+        <p class="admin-kicker">LOCAL CONTENT ADMINISTRATION</p>
+        <h1 id="login-title">Sign in to edit services.</h1>
+        <p>This dashboard only works when the ASP.NET Core app is running locally. Its password is supplied by the local machine—not saved in this site.</p>
+        <form id="login-form">
+          <label for="password">Administrator password</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" required autofocus />
+          <button type="submit">Sign in</button>
+          <p id="login-status" class="form-status" role="status"></p>
+        </form>
+      </section>
+    </main>
+    <script src="login.js"></script>
+  </body>
+</html>

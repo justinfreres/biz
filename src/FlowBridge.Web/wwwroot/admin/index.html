@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>FlowBridge | Content admin</title>
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+  <body class="admin-body">
+    <header class="admin-header">
+      <a class="admin-brand" href="/">← FlowBridge Systems</a>
+      <div class="admin-header-actions"><span id="admin-name">Checking access…</span><button id="logout-button" type="button" class="quiet-button">Sign out</button></div>
+    </header>
+    <main class="admin-shell">
+      <section class="admin-intro">
+        <p class="admin-kicker">LOCAL SQLITE CONTENT ADMINISTRATION</p>
+        <h1>Service options</h1>
+        <p>Edit the public service cards, toggle visibility, choose their order, or add a new offering. Changes save to this computer’s local database.</p>
+        <div class="admin-actions"><button id="add-service-button" type="button">Add service</button><a href="/" target="_blank" rel="noreferrer">View public site ↗</a></div>
+        <p id="admin-status" class="form-status" role="status"></p>
+      </section>
+      <section id="service-editors" class="editor-list" aria-live="polite"></section>
+    </main>
+    <script src="admin.js"></script>
+  </body>
+</html>
